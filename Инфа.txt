@@ -6,3 +6,4 @@
 Напряжение в сети
 	Пин A3
 	https://microkontroller.ru/arduino-projects/prostoj-voltmetr-na-arduino-uno/
+	https://cxem.net/calc/divider_calc.php
