@@ -7,6 +7,7 @@ float voltage = 0.0;
 float r1 = 10000.0;						//сопротивление резистора r1
 float r2 = 3330.0;						// сопротивление резистора r2
 float OkrugEngineSpeed = 0.0;
+float OkrugVoltage = 0.0;
 
 void setup(){
   Serial.begin(9600);
@@ -15,19 +16,32 @@ void setup(){
   pinMode(buttonPin, INPUT);			// подкллючение пина для определение оборотов
 }
 
-void main(){
+int main(){
 	// Передача значения
 	if ((millis() - time > 1000)){
 		time = millis();
+
+		Serial.println(String(abs(round(OkrugEngineSpeed * 2))) + ";" + String("0.0") + ";" + String(voltage) + ";");	// Передача данных по serial в виде "обороты;температура;вольтаж;"
+		OkrugEngineSpeed = 0.0;
+	} else {
 		voltage = ((analogRead(A2) * 5.0) / 1024.0) / (r2/(r1+r2));		// Определение вольтажа
 		if (voltage < 0.1){
 			voltage=0.0;
 		}
-		Serial.println(String(abs(round(OkrugEngineSpeed * 2))) + ";" + String("0.0") + ";" + String(voltage) + ";");	// Передача данных по serial в виде "обороты;температура;вольтаж;"
-		OkrugEngineSpeed = 0.0;
-	} else {
-		if (EngineSpeed > 0){
-			OkrugEngineSpeed = (OkrugEngineSpeed + EngineSpeed) / 2;		// Окуругление оборотов двигателя
+		if (voltage > 0){
+			if (OkrugVoltage > 0){
+				OkrugVoltage = (OkrugVoltage + voltage) / 2;		// Округление вольтажа
+			} else {
+				OkrugVoltage = voltage;
+			}
+		}
+		
+		if (engineSpeed > 0){
+			if (OkrugEngineSpeed > 0){
+				OkrugEngineSpeed = (OkrugEngineSpeed + engineSpeed) / 2;		// Округление оборотов двигателя
+			} else {
+				OkrugEngineSpeed = engineSpeed;
+			}
 		}
 	}
 }
