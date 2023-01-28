@@ -1,9 +1,3 @@
-Обороты
-	Пин 5
-Темперетура
-	Пин A4 Нужно поменять
-	https://www.youtube.com/watch?v=FBLr_v8Q260&ab_channel=%D0%97%D0%B0%D0%BC%D0%B5%D1%82%D0%BA%D0%B8%D0%90%D1%80%D0%B4%D1%83%D0%B8%D0%BD%D1%89%D0%B8%D0%BA%D0%B0
-Напряжение в сети
-	Пин A3
-	https://microkontroller.ru/arduino-projects/prostoj-voltmetr-na-arduino-uno/
-	https://cxem.net/calc/divider_calc.php
+Проблемы:
+- походу не точно считает обороты, нужно проверить.
+- вольтаж при питании не от USB считывается криво. Походу опорное напряжение меняется на ХЗ какое.
